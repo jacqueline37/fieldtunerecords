@@ -1,9 +1,12 @@
 # Fieldtune Records 公式サイト
 
 Ch（オーナー）が運営する自然音・フィールドレコーディング素材レーベル「Fieldtune Records」の公式サイト。
-Googleサイトで作っていた https://www.fieldtunerecords.com/ を、Claude Codeで更新できる静的HTMLサイトに移行中。
+Googleサイトで作っていた https://www.fieldtunerecords.com/ を、Claude Codeで更新できる静的HTMLサイトに移行した（2026-11-23 公開）。
 
-## 現状（2026-11-22 時点）
+## 現状（2026-11-23 時点）
+
+- **公開済み**。GitHub Pages（https://github.com/jacqueline37/fieldtunerecords の main ルート）から https://www.fieldtunerecords.com を配信している。main に push すれば数分で本番に出る
+  - 確認の手順は「公開の記録」を参照
 
 - 2026-11-23 オーナーの指示で「とりあえず外部リンクだけのペライチ」に縮小した
   - 今の `index.html`: ヘッダー（名前＋About文＋カテゴリ1行＋波形バー）→ Shop / Merch / Listen のリンク → Technical Setup → Licensing → Privacy Policy → フッター（問い合わせメール）
@@ -11,7 +14,6 @@ Googleサイトで作っていた https://www.fieldtunerecords.com/ を、Claude
   - Technical Setup / Licensing / Privacy Policy はオーナーの希望で戻した（2026-11-23）。文言はGoogleサイトの原文そのまま。言い換えない
   - 例外: Licensing の1文目のあとに、オーナーの希望で「If those terms differ from the summary below, the platform's terms apply.」を追加した（販売先の規約が優先）
 - 教訓: 「〜だけでいい」と言われても、License・Privacy のような説明系の項目を消すときは先に確認する
-- まだ公開していない。本番は引き続きGoogleサイトが表示されている
 
 ## 構成
 
@@ -70,16 +72,18 @@ CLAUDE.md    # このファイル
 - スマホ対応済み（320px幅で横はみ出しなしを確認）
 - 確認用ローカルサーバー: `.claude/launch.json` の `site`（http://localhost:8123）。ファイル直開きのプレビューはJSが動かず波形バーが出ないので、こちらで見る
 
-## 公開の予定
+## 公開の記録（2026-11-23 完了）
 
-1. GitHubにリポジトリを作ってpush
-   - 公開（public）リポジトリでよい。オーナーの希望は「他人に書き換えられなければいい」で、コードを見られるのは構わない
+1. GitHub リポジトリ: https://github.com/jacqueline37/fieldtunerecords （public）
+   - オーナーの希望は「他人に書き換えられなければいい」で、コードを見られるのは構わない
    - コラボレーターは追加しない。他人からのPull Requestは取り込まない（オーナー以外の変更は入れない）
-2. GitHub Pagesで公開（mainブランチのルート）。`CNAME` はもう置いてある
-3. ドメイン管理会社でDNSをGoogleサイトからGitHub Pagesに向け直す（オーナーが作業）
-   - `www` → CNAME `<GitHubユーザー名>.github.io`
-   - apex（fieldtunerecords.com）→ A レコード 185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153
-   - 切り替え後、GitHub Pagesの設定で「Enforce HTTPS」をオンにする
+2. GitHub Pages: main ブランチのルート。`CNAME` で www.fieldtunerecords.com。Enforce HTTPS オン
+3. ドメイン: 登録は **Squarespace Domains**（元は Google Domains。Googleアカウントでログイン）。DNSも Squarespace の「DNS設定」で管理
+   - カスタムレコード: `www` CNAME → `jacqueline37.github.io` / `@` A → 185.199.108.153・109・110・111.153（GitHub公式ドキュメントの値）
+   - 「Squarespaceの既定値」プリセットは削除済み。「Squarespace Domain Connect」は害がないので残してある
+   - **触らないもの**: MX（smtp.google.com）、TXT `@`（SPF）、TXT `google._domainkey`（DKIM）、CNAME `ghizaz3hekhm`（Googleの所有者確認）。メール info@ は Google Workspace で動いている
+   - CNAME `site` → ghs.googlehosted.com は旧Googleサイト用の残り。害はない。消すかはオーナー次第
+4. 公開直後の時点で https://fieldtunerecords.com （wwwなし・https）だけ証明書エラーが残っていた。GitHubの自動発行待ち。24時間たっても直らなければ、Pages設定で Custom domain を入れ直して再発行させる
 
 ## 今後の候補（オーナーが決めたらやる）
 
