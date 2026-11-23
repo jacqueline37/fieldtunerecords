@@ -14,7 +14,7 @@ Googleサイトで作っていた https://www.fieldtunerecords.com/ を、Claude
 ```
 index.html   # サイト本体。CSS/JSもすべてこの1ファイルに入っている
 CNAME        # GitHub Pages用の独自ドメイン設定（www.fieldtunerecords.com）
-README.md    # 公開手順
+README.md    # 空でよい（管理者はオーナー本人なので不要。公開手順はこのファイルに書く）
 CLAUDE.md    # このファイル
 ```
 
@@ -63,6 +63,8 @@ CLAUDE.md    # このファイル
 ## 公開の予定
 
 1. GitHubにリポジトリを作ってpush
+   - 公開（public）リポジトリでよい。オーナーの希望は「他人に書き換えられなければいい」で、コードを見られるのは構わない
+   - コラボレーターは追加しない。他人からのPull Requestは取り込まない（オーナー以外の変更は入れない）
 2. GitHub Pagesで公開（mainブランチのルート）。`CNAME` はもう置いてある
 3. ドメイン管理会社でDNSをGoogleサイトからGitHub Pagesに向け直す（オーナーが作業）
    - `www` → CNAME `<GitHubユーザー名>.github.io`
