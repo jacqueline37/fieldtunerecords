@@ -54,7 +54,7 @@
   /* Hero */
   .hero {
     position: relative;
-    padding: 140px 0 120px;
+    padding: 140px 0 210px;
     overflow: hidden;
     background:
       radial-gradient(ellipse at 20% 10%, rgba(79,107,71,0.18), transparent 60%),
@@ -71,7 +71,22 @@
   }
   .hero p { margin-top: 24px; max-width: 46ch; font-size: 1.08rem; color: var(--ink-soft); }
   .hero p.eyebrow { margin-top: 0; margin-bottom: 8px; font-size: 0.75rem; color: var(--moss-dark); }
-  .wave { position: absolute; right: -40px; bottom: 40px; width: 560px; max-width: 70%; opacity: 0.5; }
+  /* Grass-like bars that double as a level meter: the sound of a field */
+  .field { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; pointer-events: none; }
+  .field svg { display: block; }
+  .field rect {
+    opacity: 0.85;
+    transform-box: fill-box; transform-origin: 50% 100%;
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .field.static rect { animation: none; }
+  @keyframes rise { from { transform: scaleY(0); } }
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--moss-dark); outline-offset: 3px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .field rect { animation: none; }
+    .store { transition: none; }
+  }
   .btn {
     display: inline-block; margin-top: 36px;
     padding: 13px 28px; border-radius: 999px;
@@ -129,7 +144,8 @@
 
   @media (max-width: 720px) {
     nav ul { display: none; }
-    .hero { padding: 96px 0 88px; }
+    .hero { padding: 96px 0 170px; }
+    .field { height: 110px; }
     section { padding: 72px 0; }
     .license { grid-template-columns: 1fr; }
   }
@@ -156,10 +172,7 @@
     <p>Nature ambience, environmental recordings, and original music loops for games, films, VR, and digital media.</p>
     <a href="#shop" class="btn">Browse the library</a>
   </div>
-  <svg class="wave" viewBox="0 0 560 120" fill="none" aria-hidden="true">
-    <path d="M0 60 C 20 60, 25 30, 40 30 S 60 90, 80 90 S 100 20, 120 20 S 140 100, 160 100 S 180 40, 200 40 S 220 80, 240 80 S 260 10, 280 10 S 300 110, 320 110 S 340 35, 360 35 S 380 85, 400 85 S 420 45, 440 45 S 460 70, 480 70 S 500 55, 520 55 S 540 60, 560 60" stroke="#4f6b47" stroke-width="3" stroke-linecap="round"/>
-    <path d="M0 60 C 30 60, 40 45, 60 45 S 90 75, 110 75 S 140 40, 170 40 S 200 80, 230 80 S 260 30, 290 30 S 320 90, 350 90 S 380 50, 410 50 S 440 68, 470 68 S 510 58, 560 60" stroke="#34492f" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-  </svg>
+  <div class="field" id="field" aria-hidden="true"></div>
 </header>
 
 <section id="about">
@@ -259,6 +272,57 @@
   </div>
 </footer>
 
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+
+// Hero: bars standing on the baseline, shaped like gusts of wind.
+// Heights are deterministic (no Math.random) so a resize never reshuffles them.
+(function () {
+  var el = document.getElementById('field');
+  if (!el) return;
+  var NS = 'http://www.w3.org/2000/svg', PITCH = 12, WIDTH = 6, built = false;
+
+  function rnd(i) {
+    var t = (i * 2654435761) >>> 0;
+    t ^= t >>> 15; t = Math.imul(t, 2246822519) >>> 0; t ^= t >>> 13;
+    return (t >>> 0) / 4294967296;
+  }
+  function level(i) {
+    var gust = 0.55 + 0.45 * Math.sin(i * 0.11 + 0.8) * Math.cos(i * 0.037);
+    return Math.min(1, Math.max(0.06, gust * (0.3 + 0.7 * rnd(i))));
+  }
+  function build() {
+    var w = el.clientWidth, h = el.clientHeight;
+    if (!w || !h) return;
+    var n = Math.ceil(w / PITCH) + 1;
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    for (var i = 0; i < n; i++) {
+      var bh = Math.max(10, level(i) * h);
+      var r = document.createElementNS(NS, 'rect');
+      r.setAttribute('x', i * PITCH);
+      r.setAttribute('y', h - bh);
+      r.setAttribute('width', WIDTH);
+      r.setAttribute('height', bh + WIDTH);
+      r.setAttribute('rx', WIDTH / 2);
+      r.setAttribute('fill', rnd(i + 999) < 0.3 ? '#34492f' : '#4f6b47');
+      r.style.animationDelay = Math.round((i / n) * 700) + 'ms';
+      svg.appendChild(r);
+    }
+    el.textContent = '';
+    el.appendChild(svg);
+    if (built) el.classList.add('static');
+    built = true;
+  }
+
+  build();
+  var timer;
+  window.addEventListener('resize', function () {
+    clearTimeout(timer);
+    timer = setTimeout(build, 150);
+  });
+})();
+</script>
 </body>
 </html>
