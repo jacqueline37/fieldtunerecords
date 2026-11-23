@@ -90,6 +90,26 @@
   .link .arrow { color: var(--moss); font-size: 1.1rem; font-weight: 600; flex-shrink: 0; }
   a:focus-visible { outline: 3px solid var(--moss-dark); outline-offset: 3px; border-radius: 12px; }
 
+  /* Info sections: Technical Setup, Licensing, Privacy Policy */
+  .info { margin-top: 56px; padding-top: 32px; border-top: var(--rule) solid var(--line); }
+  .info p { color: var(--ink-soft); font-size: 0.95rem; }
+  .info p + p { margin-top: 10px; }
+  .info a { color: var(--moss-dark); }
+  .info a:focus-visible { border-radius: 4px; }
+  .specs { margin-top: 18px; border-top: var(--rule) solid var(--line); }
+  .specs div { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 10px 0; border-bottom: var(--rule) solid var(--line); font-size: 0.95rem; }
+  .specs dt { font-weight: 600; }
+  .specs dd { color: var(--ink-soft); }
+  .terms { list-style: none; display: grid; gap: 10px; margin-top: 14px; }
+  .terms li { padding-left: 26px; position: relative; color: var(--ink-soft); font-size: 0.95rem; }
+  .terms li::before { position: absolute; left: 0; font-weight: 700; }
+  .terms .ok::before { content: "✓"; color: var(--moss); }
+  .terms .ng::before { content: "✕"; color: #9a5a4a; }
+  .terms strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 420px) {
+    .specs div { grid-template-columns: 1fr; gap: 0; }
+  }
+
   /* Footer */
   footer { padding: 32px 0 40px; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--ink-soft); text-align: center; }
   footer p + p { margin-top: 4px; }
@@ -133,6 +153,34 @@
       <li><a class="link" href="https://soundcloud.com/fieldtunerecords" target="_blank" rel="noopener"><div><strong>SoundCloud</strong><span>Previews</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
       <li><a class="link" href="https://www.youtube.com/@FieldtuneRecords" target="_blank" rel="noopener"><div><strong>YouTube</strong><span>Videos</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
     </ul>
+
+    <section class="info" aria-labelledby="setup">
+      <h2 id="setup">Technical Setup</h2>
+      <p>All recordings are captured on location in quiet natural surroundings, far from artificial noise.</p>
+      <p>Each soundscape is preserved with exceptional clarity and dynamic range, maintaining the authentic air, distance, and presence of the moment it was recorded.</p>
+      <dl class="specs" aria-label="Equipment used">
+        <div><dt>Recorder</dt><dd>ZOOM F3 (32-bit float)</dd></div>
+        <div><dt>Microphones</dt><dd>BEHRINGER C-2 stereo condenser pair</dd></div>
+        <div><dt>Format</dt><dd>48 kHz / 32-bit float WAV</dd></div>
+        <div><dt>Recording style</dt><dd>On-site stereo recording, minimal processing</dd></div>
+      </dl>
+    </section>
+
+    <section class="info" aria-labelledby="licensing">
+      <h2 id="licensing">Licensing</h2>
+      <p>Products are distributed under the terms of each platform (e.g., Unity Asset Store, BOOTH, Audiostock).</p>
+      <p>Unless otherwise stated on a product page:</p>
+      <ul class="terms">
+        <li class="ok"><strong>Permitted:</strong> Use in commercial and non-commercial projects; modify for your own productions; include in compiled builds or final renders.</li>
+        <li class="ng"><strong>Not Permitted:</strong> Resale, redistribution, or sharing of raw files as stock or as part of competing asset packs.</li>
+      </ul>
+    </section>
+
+    <section class="info" aria-labelledby="privacy">
+      <h2 id="privacy">Privacy Policy</h2>
+      <p>We do not collect personal data on this website beyond information you voluntarily provide via email.</p>
+      <p>If you wish to request or delete any information you have provided, please contact us at:<br><a href="mailto:info@fieldtunerecords.com">info@fieldtunerecords.com</a></p>
+    </section>
   </div>
 </main>
 
