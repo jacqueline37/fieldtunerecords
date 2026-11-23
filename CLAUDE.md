@@ -9,6 +9,7 @@ Googleサイトで作っていた https://www.fieldtunerecords.com/ を、Claude
   - 今の `index.html`: ヘッダー（名前＋キャッチ＋波形バー）→ Shop / Merch / Listen のリンク → Technical Setup → Licensing → Privacy Policy → フッター（問い合わせメール）
   - About のセクションは外したまま（内容は下の「サイトの中身」に残してある）
   - Technical Setup / Licensing / Privacy Policy はオーナーの希望で戻した（2026-11-23）。文言はGoogleサイトの原文そのまま。言い換えない
+  - 例外: Licensing の1文目のあとに、オーナーの希望で「If those terms differ from the summary below, the platform's terms apply.」を追加した（販売先の規約が優先）
 - 教訓: 「〜だけでいい」と言われても、License・Privacy のような説明系の項目を消すときは先に確認する
 - まだ公開していない。本番は引き続きGoogleサイトが表示されている
 
