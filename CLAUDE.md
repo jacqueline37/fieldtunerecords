@@ -6,8 +6,8 @@ Googleサイトで作っていた https://www.fieldtunerecords.com/ を、Claude
 ## 現状（2026-11-22 時点）
 
 - 2026-11-23 オーナーの指示で「とりあえず外部リンクだけのペライチ」に縮小した
-  - 今の `index.html`: ヘッダー（名前＋キャッチ＋波形バー）→ Shop / Merch / Listen のリンク → Technical Setup → Licensing → Privacy Policy → フッター（問い合わせメール）
-  - About のセクションは外したまま（内容は下の「サイトの中身」に残してある）
+  - 今の `index.html`: ヘッダー（名前＋About文＋カテゴリ1行＋波形バー）→ Shop / Merch / Listen のリンク → Technical Setup → Licensing → Privacy Policy → フッター（問い合わせメール）
+  - About はヘッダーに組み込んだ（見出しなし、Googleサイトの原文のまま）。「Welcome to the official website…」の一文は残すか削るかオーナー未決
   - Technical Setup / Licensing / Privacy Policy はオーナーの希望で戻した（2026-11-23）。文言はGoogleサイトの原文そのまま。言い換えない
   - 例外: Licensing の1文目のあとに、オーナーの希望で「If those terms differ from the summary below, the platform's terms apply.」を追加した（販売先の規約が優先）
 - 教訓: 「〜だけでいい」と言われても、License・Privacy のような説明系の項目を消すときは先に確認する
@@ -61,7 +61,12 @@ CLAUDE.md    # このファイル
 
 - コンセプト: 森・苔・紙。落ち着いた自然のトーン
 - 色（`:root` のCSS変数）: 背景 `#f4f1ea` / 背景(交互) `#ebe6db` / 文字 `#22281f` / 補助文字 `#5b6355` / アクセント(苔) `#4f6b47`・`#34492f` / 線 `#d4cdbd` / カード `#fbfaf6`
-- 構成: 1カラム（幅560px）。Header → Shop（販売）→ Merch（グッズ）→ Listen（試聴）→ Technical Setup → Licensing → Privacy Policy → Footer。ナビなし
+- 構成: 1カラム（幅560px）、すべて左揃え。Header → Shop（販売）→ Merch（グッズ）→ Listen（試聴）→ Technical Setup → Licensing → Privacy Policy → Footer。ナビなし
+- 2026-11-23 のデザイン方針（オーナー承認済み）
+  - 主役は波形バーだけ。ヘッダー下端の苔色の線（地面）に立たせる。ほかは静かに
+  - リンクはボタン（高さ56px、苔色の2px枠、角丸10px、名前だけ中央揃え、ホバーで苔色に塗る）。「→」や説明文は付けない
+    - 罫線で区切った行も試したが、オーナーに「見出しと区別しにくい、ボタンの方がいい」と言われて変えた。行の形式に戻さない
+  - 見出しは普通の書き方（Shop）。全部大文字のラベル、グラデーションの背景、ホバーで浮く動きは使わない
 - スマホ対応済み（320px幅で横はみ出しなしを確認）
 - 確認用ローカルサーバー: `.claude/launch.json` の `site`（http://localhost:8123）。ファイル直開きのプレビューはJSが動かず波形バーが出ないので、こちらで見る
 

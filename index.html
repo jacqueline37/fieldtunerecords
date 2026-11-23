@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://www.fieldtunerecords.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f1ea;
@@ -30,95 +30,88 @@
   body {
     font-family: var(--font);
     font-weight: 400;
+    font-size: 1rem;
     color: var(--ink);
     background: var(--bg);
-    line-height: 1.7;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
     display: flex; flex-direction: column;
   }
   a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--moss-dark); outline-offset: 3px; border-radius: 4px; }
   .wrap { width: 100%; max-width: 560px; margin: 0 auto; padding: 0 20px; }
 
-  /* Header */
+  /* Header: name, what the label does, and the field of bars it stands on */
   header {
     position: relative;
-    padding: 88px 0 132px;
-    text-align: center;
-    overflow: hidden;
-    background:
-      radial-gradient(ellipse at 20% 10%, rgba(79,107,71,0.18), transparent 60%),
-      radial-gradient(ellipse at 90% 80%, rgba(52,73,47,0.14), transparent 55%),
-      var(--bg);
+    padding: 80px 0 128px;
+    border-bottom: var(--rule) solid var(--moss-dark);
   }
   h1 {
     font-weight: 700;
-    letter-spacing: -0.025em;
-    font-size: clamp(2rem, 7vw, 2.8rem);
-    line-height: 1.15;
+    font-size: clamp(2.25rem, 9vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
   }
-  header p { margin: 16px auto 0; max-width: 40ch; color: var(--ink-soft); }
-  /* Grass-like bars that double as a level meter: the sound of a field */
-  .field { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; pointer-events: none; }
+  .lead { margin-top: 20px; max-width: 40ch; font-size: 1.0625rem; color: var(--ink-soft); }
+  .cats { margin-top: 14px; font-size: 0.9375rem; }
+  .field { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; overflow: hidden; pointer-events: none; }
   .field svg { display: block; }
   .field rect {
-    opacity: 0.85;
     transform-box: fill-box; transform-origin: 50% 100%;
     animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
   .field.static rect { animation: none; }
   @keyframes rise { from { transform: scaleY(0); } }
 
-  /* Links */
-  main { flex: 1; padding: 48px 0 72px; }
-  h2 {
-    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--ink-soft); margin: 40px 0 12px;
+  /* Links: one ruled list per group */
+  main { flex: 1; padding: 48px 0 80px; }
+  h2 { font-size: 1.125rem; font-weight: 700; line-height: 1.3; margin: 48px 0 8px; }
+  main .wrap > h2:first-child { margin-top: 0; }
+  h2 + .links { margin-top: 12px; }
+  .links { list-style: none; display: grid; gap: 10px; }
+  .links a {
+    display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 8px 20px;
+    border: 2px solid var(--moss); border-radius: 10px; background: var(--card);
+    font-size: 1.0625rem; font-weight: 600; text-decoration: none; color: var(--moss-dark);
+    transition: background-color .15s, color .15s;
   }
-  h2:first-child { margin-top: 0; }
-  ul { list-style: none; display: grid; gap: 10px; }
-  .link {
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    min-height: 64px; padding: 12px 20px;
-    border: var(--rule) solid var(--line); border-radius: 12px;
-    background: var(--card); text-decoration: none;
-    transition: border-color .2s, transform .2s;
-  }
-  .link:hover { border-color: var(--moss); transform: translateY(-2px); }
-  .link strong { font-weight: 600; display: block; line-height: 1.3; }
-  .link span { font-size: 0.88rem; color: var(--ink-soft); }
-  .link .arrow { color: var(--moss); font-size: 1.1rem; font-weight: 600; flex-shrink: 0; }
-  a:focus-visible { outline: 3px solid var(--moss-dark); outline-offset: 3px; border-radius: 12px; }
+  .links a:hover { background: var(--moss); color: #fff; }
+  .links a:active { background: var(--moss-dark); border-color: var(--moss-dark); color: #fff; }
+  .links a:focus-visible { border-radius: 10px; }
 
   /* Info sections: Technical Setup, Licensing, Privacy Policy */
-  .info { margin-top: 56px; padding-top: 32px; border-top: var(--rule) solid var(--line); }
-  .info p { color: var(--ink-soft); font-size: 0.95rem; }
+  .info { margin-top: 64px; padding-top: 32px; border-top: var(--rule) solid var(--line); }
+  .info h2 { margin-top: 0; margin-bottom: 12px; }
+  .info p { color: var(--ink-soft); font-size: 0.9375rem; }
   .info p + p { margin-top: 10px; }
   .info a { color: var(--moss-dark); }
-  .info a:focus-visible { border-radius: 4px; }
   .specs { margin-top: 18px; border-top: var(--rule) solid var(--line); }
-  .specs div { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 10px 0; border-bottom: var(--rule) solid var(--line); font-size: 0.95rem; }
+  .specs div { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 10px 0; border-bottom: var(--rule) solid var(--line); font-size: 0.9375rem; }
   .specs dt { font-weight: 600; }
   .specs dd { color: var(--ink-soft); }
   .terms { list-style: none; display: grid; gap: 10px; margin-top: 14px; }
-  .terms li { padding-left: 26px; position: relative; color: var(--ink-soft); font-size: 0.95rem; }
+  .terms li { padding-left: 26px; position: relative; color: var(--ink-soft); font-size: 0.9375rem; }
   .terms li::before { position: absolute; left: 0; font-weight: 700; }
   .terms .ok::before { content: "✓"; color: var(--moss); }
   .terms .ng::before { content: "✕"; color: #9a5a4a; }
   .terms strong { color: var(--ink); font-weight: 600; }
-  @media (max-width: 420px) {
-    .specs div { grid-template-columns: 1fr; gap: 0; }
-  }
 
   /* Footer */
-  footer { padding: 32px 0 40px; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--ink-soft); text-align: center; }
+  footer { padding: 32px 0 40px; border-top: var(--rule) solid var(--line); font-size: 0.875rem; color: var(--ink-soft); }
   footer p + p { margin-top: 4px; }
   footer a { color: var(--moss-dark); }
 
+  @media (max-width: 420px) {
+    header { padding: 48px 0 116px; }
+    .lead { margin-top: 16px; }
+    main { padding-top: 36px; }
+    .specs div { grid-template-columns: 1fr; gap: 0; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .field rect { animation: none; }
-    .link { transition: none; }
-    .link:hover { transform: none; }
+    .links a { transition: none; }
   }
 </style>
 </head>
@@ -127,7 +120,8 @@
 <header>
   <div class="wrap">
     <h1>Fieldtune Records</h1>
-    <p>Nature ambience, environmental recordings, and original music loops for games, films, VR, and digital media.</p>
+    <p class="lead">Welcome to the official website of Fieldtune Records. We specialize in nature ambience, environmental recordings, and original music loops, designed for use in games, films, VR, and digital media.</p>
+    <p class="cats">Audio: ambience, sound effects, music loops (royalty-free)</p>
   </div>
   <div class="field" id="field" aria-hidden="true"></div>
 </header>
@@ -135,23 +129,23 @@
 <main>
   <div class="wrap">
     <h2 id="shop">Shop</h2>
-    <ul aria-labelledby="shop">
-      <li><a class="link" href="https://fieldtune.booth.pm/" target="_blank" rel="noopener"><div><strong>BOOTH</strong><span>Audio assets</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
-      <li><a class="link" href="https://assetstore.unity.com/ja-JP/publishers/119348" target="_blank" rel="noopener"><div><strong>Unity Asset Store</strong><span>For Unity projects</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
-      <li><a class="link" href="https://audiostock.jp/artists/65299" target="_blank" rel="noopener"><div><strong>Audiostock</strong><span>Royalty-free audio</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
-      <li><a class="link" href="https://fieldtunerecords.bandcamp.com/" target="_blank" rel="noopener"><div><strong>Bandcamp</strong><span>Albums & tracks</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
-      <li><a class="link" href="https://fieldtunerecords.gumroad.com/" target="_blank" rel="noopener"><div><strong>Gumroad</strong><span>Audio packs</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
+    <ul class="links" aria-labelledby="shop">
+      <li><a href="https://fieldtune.booth.pm/" target="_blank" rel="noopener">BOOTH</a></li>
+      <li><a href="https://assetstore.unity.com/ja-JP/publishers/119348" target="_blank" rel="noopener">Unity Asset Store</a></li>
+      <li><a href="https://audiostock.jp/artists/65299" target="_blank" rel="noopener">Audiostock</a></li>
+      <li><a href="https://fieldtunerecords.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a></li>
+      <li><a href="https://fieldtunerecords.gumroad.com/" target="_blank" rel="noopener">Gumroad</a></li>
     </ul>
 
     <h2 id="merch">Merch</h2>
-    <ul aria-labelledby="merch">
-      <li><a class="link" href="https://suzuri.jp/fieldtunerecords" target="_blank" rel="noopener"><div><strong>SUZURI</strong><span>Goods & apparel</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
+    <ul class="links" aria-labelledby="merch">
+      <li><a href="https://suzuri.jp/fieldtunerecords" target="_blank" rel="noopener">SUZURI</a></li>
     </ul>
 
     <h2 id="listen">Listen</h2>
-    <ul aria-labelledby="listen">
-      <li><a class="link" href="https://soundcloud.com/fieldtunerecords" target="_blank" rel="noopener"><div><strong>SoundCloud</strong><span>Previews</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
-      <li><a class="link" href="https://www.youtube.com/@FieldtuneRecords" target="_blank" rel="noopener"><div><strong>YouTube</strong><span>Videos</span></div><span class="arrow" aria-hidden="true">→</span></a></li>
+    <ul class="links" aria-labelledby="listen">
+      <li><a href="https://soundcloud.com/fieldtunerecords" target="_blank" rel="noopener">SoundCloud</a></li>
+      <li><a href="https://www.youtube.com/@FieldtuneRecords" target="_blank" rel="noopener">YouTube</a></li>
     </ul>
 
     <section class="info" aria-labelledby="setup">
