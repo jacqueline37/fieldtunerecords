@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://www.fieldtunerecords.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f1ea;
@@ -22,13 +22,13 @@
     --moss-dark: #34492f;
     --line: #d4cdbd;
     --card: #fbfaf6;
-    --serif: "Fraunces", Georgia, serif;
+    --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
     --rule: 1.5px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: var(--font);
     font-weight: 400;
     color: var(--ink);
     background: var(--bg);
@@ -46,7 +46,7 @@
     border-bottom: 1px solid var(--line);
   }
   nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .logo { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; letter-spacing: 0.02em; text-decoration: none; }
+  .logo { font-family: var(--font); font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; text-decoration: none; }
   nav ul { display: flex; gap: 28px; list-style: none; }
   nav ul a { text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
   nav ul a:hover { color: var(--moss); }
@@ -62,10 +62,11 @@
       var(--bg);
   }
   .hero h1 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(2.3rem, 5.4vw, 4rem);
-    line-height: 1.12;
+    font-family: var(--font);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    font-size: clamp(2.2rem, 5.2vw, 3.8rem);
+    line-height: 1.15;
     max-width: 16ch;
   }
   .hero p { margin-top: 24px; max-width: 46ch; font-size: 1.08rem; color: var(--ink-soft); }
@@ -84,12 +85,12 @@
   section { padding: 96px 0; }
   section.alt { background: var(--bg-alt); }
   .eyebrow { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--moss-dark); font-weight: 600; }
-  h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin: 8px 0 28px; line-height: 1.2; }
+  h2 { font-family: var(--font); font-weight: 700; letter-spacing: -0.02em; font-size: clamp(1.7rem, 3.4vw, 2.3rem); margin: 8px 0 28px; line-height: 1.2; }
   .lead { max-width: 60ch; color: var(--ink-soft); }
 
   .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 40px; }
   .card { background: var(--card); border: var(--rule) solid var(--line); border-radius: 14px; padding: 30px 26px; }
-  .card h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 8px; }
+  .card h3 { font-family: var(--font); font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
   .card p { color: var(--ink-soft); font-size: 0.95rem; }
   .icon { width: 36px; height: 36px; color: var(--moss); margin-bottom: 18px; }
 
@@ -97,7 +98,7 @@
   .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 40px; border-top: var(--rule) solid var(--line); }
   .spec { padding: 24px 20px 24px 0; border-bottom: var(--rule) solid var(--line); }
   .spec dt { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); }
-  .spec dd { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; margin-top: 4px; }
+  .spec dd { font-family: var(--font); font-size: 1.1rem; font-weight: 600; margin-top: 4px; }
 
   /* Stores */
   .stores { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 40px; }
