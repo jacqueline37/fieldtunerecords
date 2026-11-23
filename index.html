@@ -50,6 +50,12 @@
   nav ul { display: flex; gap: 28px; list-style: none; }
   nav ul a { text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
   nav ul a:hover { color: var(--moss); }
+  .menu-btn {
+    display: none; min-height: 44px; padding: 0 18px; border-radius: 999px;
+    border: var(--rule) solid var(--moss); background: transparent; color: var(--moss-dark);
+    font: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  }
+  .menu-btn:focus-visible { outline: 3px solid var(--moss-dark); outline-offset: 3px; }
 
   /* Hero */
   .hero {
@@ -143,7 +149,16 @@
   footer a { color: var(--moss); }
 
   @media (max-width: 720px) {
-    nav ul { display: none; }
+    .menu-btn { display: block; }
+    nav ul {
+      display: none; flex-direction: column; gap: 0;
+      position: absolute; top: 64px; left: 0; right: 0;
+      padding: 0 28px 12px; background: var(--bg);
+      border-bottom: var(--rule) solid var(--line);
+    }
+    nav.open ul { display: flex; }
+    nav ul li { border-top: var(--rule) solid var(--line); }
+    nav ul a { display: block; padding: 15px 0; font-size: 1rem; }
     .hero { padding: 96px 0 170px; }
     .field { height: 110px; }
     section { padding: 72px 0; }
@@ -153,10 +168,11 @@
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <div class="wrap">
     <a href="#" class="logo">Fieldtune Records</a>
-    <ul>
+    <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul id="menu">
       <li><a href="#about">About</a></li>
       <li><a href="#recording">Recording</a></li>
       <li><a href="#shop">Shop</a></li>
@@ -274,6 +290,22 @@
 
 <script>
 document.getElementById('y').textContent = new Date().getFullYear();
+
+// Mobile menu: toggle, and close after choosing a link or pressing Escape.
+(function () {
+  var nav = document.getElementById('nav'), btn = document.getElementById('menu-btn');
+  if (!nav || !btn) return;
+  function set(open) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.textContent = open ? 'Close' : 'Menu';
+  }
+  btn.addEventListener('click', function () { set(!nav.classList.contains('open')); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('#menu a')) set(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); btn.focus(); }
+  });
+})();
 
 // Hero: bars standing on the baseline, shaped like gusts of wind.
 // Heights are deterministic (no Math.random) so a resize never reshuffles them.
